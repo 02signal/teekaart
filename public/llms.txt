@@ -6,6 +6,7 @@ Leht ei eelda tehnilist tausta. Sõnastus on mõeldud kogenud ettevõtte omaniku
 
 Põhiline väärtuspakkumine:
 - aitame eristada, kas ettevõtte järgmine samm on digiteekaart, digitaliseerimine, automatiseerimine või väiksem praktiline töö;
+- lehel on omaniku suunavaliku abiline, mis annab nelja lihtsa küsimuse põhjal esimese soovitatud tee;
 - anname ühe tööpäeva jooksul esmase suunava vastuse;
 - selgitame, millist infot on enne täpsemat pakkumist vaja;
 - ütleme ka seda, mida praegu ei tasu teha.
@@ -21,6 +22,9 @@ Võimalikud suunad:
 - Digitaliseerimine.ee: paber, Excel, vana tarkvara ja info liikumine korda;
 - Automatiseerimine.ee: korduvad käsitsi tehtavad sammud automaatseks;
 - Teekaart.ee: kui omanik ei tea veel, milline tee valida.
+
+Interaktiivne tööriist:
+- Omaniku suunavalik: lihtne küsimustik, mis suunab inimese digiteekaardi, digitaliseerimise, automatiseerimise või teekaardi enda lühikese päringu poole.
 
 Teenused:
 - esmane suunav vastus: 0 eurot;

@@ -509,6 +509,75 @@ section {
   font-weight: 760;
 }
 
+.tool-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.tool-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.tool-questions {
+  display: grid;
+  gap: 12px;
+}
+
+.tool-questions label {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fffdf8;
+  color: var(--graphite);
+  font-weight: 820;
+}
+
+.tool-questions select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.tool-card > .btn {
+  margin-top: 18px;
+}
+
+.tool-result {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fffdf8;
+}
+
+.tool-result h3 {
+  margin-top: 10px;
+  color: var(--graphite);
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+}
+
+.tool-result p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.btn-secondary.dark {
+  background: var(--graphite);
+  color: var(--white);
+  border-color: var(--graphite);
+}
+
 .lead-section {
   background: var(--graphite);
   color: var(--white);
@@ -653,12 +722,13 @@ section {
   }
 
   .proof,
-  .grid-4,
-  .grid-3,
-  .grid-2,
-  .offer,
-  .lead-grid,
-  .form-grid {
+    .grid-4,
+    .grid-3,
+    .grid-2,
+    .offer,
+    .tool-grid,
+    .lead-grid,
+    .form-grid {
     grid-template-columns: 1fr;
   }
 

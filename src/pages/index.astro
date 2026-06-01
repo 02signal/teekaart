@@ -125,6 +125,7 @@ const schema = {
       <nav class="nav" aria-label="Põhinavigeerimine">
         <a class="brand" href="/">Teekaart.ee</a>
         <div class="navlinks">
+          <a href="#abiline">Abiline</a>
           <a href="#teed">Võimalikud teed</a>
           <a href="#vastus">Mida saate</a>
           <a href="#hinnad">Hinnad</a>
@@ -158,6 +159,72 @@ const schema = {
             <div><strong>1 suund</strong><span>ütleme, kust on mõistlik alustada</span></div>
             <div><strong>1 tööpäev</strong><span>esmane vastus pärast vormi</span></div>
             <div><strong>ilma IT-keerukuseta</strong><span>omaniku keeles, mitte süsteemi keeles</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="abiline" class="white">
+        <div class="section-inner tool-grid">
+          <div>
+            <span class="kicker">Omaniku suunavalik</span>
+            <h2>Milline tee tundub teie olukorras esimene?</h2>
+            <p>
+              Kui valikuid on mitu, ei pea omanik alustama teenuse nimest. Vastake neljale küsimusele
+              ja saate kohe lihtsa suuna.
+            </p>
+            <ul class="check">
+              <li>toetus ei ole alati esimene samm</li>
+              <li>vana tarkvara ei pea alati kohe välja vahetama</li>
+              <li>väike korduv töö võib anda kiirema võidu kui suur projekt</li>
+            </ul>
+          </div>
+
+          <div class="tool-card" data-roadmap-tool>
+            <div class="tool-questions">
+              <label>
+                <span>Mis teid praegu kõige rohkem segab?</span>
+                <select data-roadmap-input="pain">
+                  <option value="unknown">Ei tea, kust alustada</option>
+                  <option value="support">Tahaks aru saada toetuse võimalusest</option>
+                  <option value="digital">Paber, Excel või vana tarkvara</option>
+                  <option value="automation">Korduv käsitöö võtab aega</option>
+                </select>
+              </label>
+              <label>
+                <span>Kas üks konkreetne töö on juba teada?</span>
+                <select data-roadmap-input="clarity">
+                  <option value="unclear">Ei ole veel selge</option>
+                  <option value="one">Jah, üks töö on teada</option>
+                  <option value="many">Võimalusi on mitu</option>
+                </select>
+              </label>
+              <label>
+                <span>Kas soovite rahastuse võimalust kontrollida?</span>
+                <select data-roadmap-input="support">
+                  <option value="maybe">Ei tea, võib-olla</option>
+                  <option value="yes">Jah</option>
+                  <option value="no">Praegu mitte</option>
+                </select>
+              </label>
+              <label>
+                <span>Kui kiiresti soovite esimese otsuse teha?</span>
+                <select data-roadmap-input="speed">
+                  <option value="soon">1-2 nädala jooksul</option>
+                  <option value="month">Selle kuu jooksul</option>
+                  <option value="later">Hiljem, tahan enne aru saada</option>
+                </select>
+              </label>
+            </div>
+            <button class="btn btn-primary" type="button" data-roadmap-calculate>Näita soovitatud suunda</button>
+            <div class="tool-result" data-roadmap-result>
+              <span class="tag">Näidis</span>
+              <h3>Alustage suunavast vastusest</h3>
+              <p>Kui õige tee ei ole veel selge, on mõistlik enne raha kulutamist saada lühike omaniku vaade.</p>
+            </div>
+            <div class="inline-actions">
+              <a class="btn btn-light" href="#kontakt" data-roadmap-cta data-track-event="cta_click" data-track-label="roadmap_tool_contact">Kirjeldan olukorda</a>
+              <a class="btn btn-secondary dark" href="tel:+37258180435" data-track-event="phone_click" data-track-label="roadmap_tool_phone">Helista</a>
+            </div>
           </div>
         </div>
       </section>
@@ -453,6 +520,110 @@ const schema = {
         const body = encodeURIComponent(toPlainText(payload));
         window.location.href = `${emailHref}&body=${body}`;
       };
+
+      const roadmapTool = document.querySelector("[data-roadmap-tool]");
+      const roadmapResult = document.querySelector("[data-roadmap-result]");
+      const roadmapButton = document.querySelector("[data-roadmap-calculate]");
+      const roadmapCta = document.querySelector("[data-roadmap-cta]");
+      let roadmapToolStarted = false;
+
+      const getRoadmapValue = (name) => document.querySelector(`[data-roadmap-input="${name}"]`)?.value || "";
+      const trackRoadmap = (eventName, params = {}) => {
+        if (typeof window.teekaartTrack === "function") {
+          window.teekaartTrack(eventName, {
+            source_site: "teekaart.ee",
+            ...params
+          });
+        }
+      };
+
+      const selectRoute = () => {
+        const pain = getRoadmapValue("pain");
+        const clarity = getRoadmapValue("clarity");
+        const support = getRoadmapValue("support");
+
+        if (pain === "support" || support === "yes") {
+          return {
+            route: "digiteekaart",
+            title: "Kontrollige esmalt toetuse ja digiteekaardi võimalust",
+            text: "Kui rahastus on oluline, tasub enne projekti tellimist vaadata, kas plaan võiks sobida EIS-i või RTE suunaga.",
+            href: "https://digiteekaart.ee/",
+            label: "roadmap_result_digiteekaart"
+          };
+        }
+
+        if (pain === "automation" && clarity === "one") {
+          return {
+            route: "automatiseerimine",
+            title: "Võtke üks korduv töö ja kontrollige automaatika sobivust",
+            text: "Kui üks tüütu töö on juba teada, on kiireim tee vaadata, kas seda saab väikese abilisega lihtsamaks teha.",
+            href: "https://automatiseerimine.ee/",
+            label: "roadmap_result_automatiseerimine"
+          };
+        }
+
+        if (pain === "digital" || clarity === "one") {
+          return {
+            route: "digitaliseerimine",
+            title: "Alustage ühest paberil, Excelis või vanas tarkvaras kinni olevast tööst",
+            text: "Ärge vahetage kohe kogu süsteemi. Kõigepealt tasub leida üks töö, mille korrastamine annab nähtava kasu.",
+            href: "https://digitaliseerimine.ee/",
+            label: "roadmap_result_digitaliseerimine"
+          };
+        }
+
+        return {
+          route: "teekaart",
+          title: "Küsige lühike omaniku suunav vastus",
+          text: "Kui variante on mitu või alguskoht ei ole selge, on mõistlik saada ühe tööpäeva jooksul rahulik esimene suund.",
+          href: "#kontakt",
+          label: "roadmap_result_contact"
+        };
+      };
+
+      roadmapTool?.addEventListener("change", () => {
+        if (roadmapToolStarted) return;
+        roadmapToolStarted = true;
+        trackRoadmap("tool_start", {
+          tool_name: "owner_route_selector"
+        });
+      });
+
+      roadmapButton?.addEventListener("click", () => {
+        const route = selectRoute();
+        const speed = getRoadmapValue("speed");
+
+        if (roadmapResult) {
+          roadmapResult.innerHTML = `
+            <span class="tag">Soovitatud suund: ${route.route}</span>
+            <h3>${route.title}</h3>
+            <p>${route.text}</p>
+          `;
+        }
+
+        if (roadmapCta) {
+          roadmapCta.setAttribute("href", route.href);
+          roadmapCta.setAttribute("data-track-label", route.label);
+          roadmapCta.textContent = route.route === "teekaart" ? "Kirjeldan olukorda" : "Ava soovitatud suund";
+        }
+
+        trackRoadmap("tool_completed", {
+          tool_name: "owner_route_selector",
+          result_route: route.route,
+          pain: getRoadmapValue("pain"),
+          clarity: getRoadmapValue("clarity"),
+          support_interest: getRoadmapValue("support"),
+          speed
+        });
+
+        if (route.route !== "teekaart" || speed === "soon") {
+          trackRoadmap("result_high_intent", {
+            tool_name: "owner_route_selector",
+            result_route: route.route,
+            speed
+          });
+        }
+      });
 
       form?.addEventListener("submit", async (event) => {
         event.preventDefault();

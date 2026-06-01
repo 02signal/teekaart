@@ -31,7 +31,17 @@
       "vat": "not included"
     }
   ],
+  "interactive_tools": [
+    {
+      "name": "Omaniku suunavalik",
+      "purpose": "Omanik saab nelja lihtsa küsimusega esimese soovituse, kas alustada digiteekaardist, digitaliseerimisest, automatiseerimisest või suunavast vastusest.",
+      "primary_event": "tool_completed"
+    }
+  ],
   "conversion_events": [
+    "tool_start",
+    "tool_completed",
+    "result_high_intent",
     "lead_form_start",
     "lead_form_submit_attempt",
     "lead_form_submit",
