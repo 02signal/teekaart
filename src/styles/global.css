@@ -1,12 +1,13 @@
 :root {
-  --ink: #17202a;
-  --graphite: #1f2d3a;
-  --green: #0a7c66;
-  --green-dark: #075744;
-  --copper: #b56a2f;
-  --gold: #c99a32;
-  --sky: #eef6f1;
-  --paper: #f6f4ef;
+  --ink: #18231f;
+  --graphite: #223228;
+  --green: #1c7a59;
+  --green-dark: #0f5039;
+  --copper: #9a6534;
+  --gold: #c4932f;
+  --map-blue: #2d6f8f;
+  --sky: #eef5ed;
+  --paper: #f6f1e7;
   --white: #ffffff;
   --muted: #5f6b76;
   --line: #d9e1e6;
@@ -24,7 +25,11 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    linear-gradient(90deg, rgba(154, 101, 52, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(45, 111, 143, 0.04) 1px, transparent 1px),
+    var(--paper);
+  background-size: 42px 42px;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.55;
 }
@@ -44,7 +49,7 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(250, 247, 239, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(16px);
 }
@@ -110,8 +115,8 @@ textarea {
   display: inline-flex;
   padding: 7px 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  color: #d5f3eb;
+  background: rgba(246, 241, 231, 0.16);
+  color: #e7f4d7;
   font-weight: 860;
   font-size: 0.88rem;
 }
@@ -181,7 +186,43 @@ h1 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   max-width: 820px;
-  margin-top: 42px;
+  margin-top: 18px;
+}
+
+.route-signs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 900px;
+  margin-top: 34px;
+}
+
+.route-signs a {
+  position: relative;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 36px 10px 14px;
+  border: 1px solid rgba(238, 223, 194, 0.72);
+  border-radius: 6px 18px 18px 6px;
+  background: rgba(246, 241, 231, 0.9);
+  color: #253524;
+  text-decoration: none;
+  font-weight: 890;
+  box-shadow: 0 12px 30px rgba(11, 22, 18, 0.26);
+}
+
+.route-signs a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  background: rgba(246, 241, 231, 0.9);
+  border-top: 1px solid rgba(238, 223, 194, 0.72);
+  border-right: 1px solid rgba(238, 223, 194, 0.72);
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .proof div {
@@ -207,7 +248,7 @@ section {
 }
 
 .white {
-  background: var(--white);
+  background: #fffdf8;
 }
 
 .sky {
@@ -275,7 +316,7 @@ section {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 22px;
-  background: var(--white);
+  background: #fffdf8;
   box-shadow: 0 12px 30px rgba(23, 32, 42, 0.06);
 }
 
@@ -298,6 +339,21 @@ section {
   color: var(--green-dark);
   font-weight: 860;
   text-decoration: none;
+}
+
+.route-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.route-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--green), var(--map-blue), var(--gold));
 }
 
 .stat {
