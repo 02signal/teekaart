@@ -1,0 +1,518 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const leadWebhookUrl = import.meta.env.PUBLIC_SITE_LEAD_WEBHOOK_URL ?? "";
+const emailHref = "mailto:info@02signal.ai?subject=Teekaart.ee%20-%20omaniku%20esimene%20suund";
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://teekaart.ee/#organization",
+      name: "Teekaart.ee",
+      legalName: "Ettevõtluskeskus OÜ",
+      url: "https://teekaart.ee/",
+      email: "info@02signal.ai",
+      telephone: "+37258180435",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: "+37258180435",
+        email: "info@02signal.ai",
+        areaServed: "EE",
+        availableLanguage: ["et"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://teekaart.ee/#website",
+      name: "Teekaart.ee",
+      url: "https://teekaart.ee/",
+      publisher: { "@id": "https://teekaart.ee/#organization" },
+      inLanguage: "et"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://teekaart.ee/#service",
+      name: "Ettevõtte järgmise praktilise sammu teekaart",
+      serviceType: "Digitaliseerimise, automatiseerimise ja toetuse võimaluse suunav eelhindamine",
+      provider: { "@id": "https://teekaart.ee/#organization" },
+      areaServed: "EE",
+      audience: {
+        "@type": "Audience",
+        audienceType: "Eesti ettevõtte omanikud ja juhid"
+      },
+      offers: [
+        {
+          "@type": "Offer",
+          name: "Esmane suunav vastus",
+          price: "0",
+          priceCurrency: "EUR"
+        },
+        {
+          "@type": "Offer",
+          name: "Omaniku ühe lehe teekaart",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: "390",
+            priceCurrency: "EUR"
+          }
+        },
+        {
+          "@type": "Offer",
+          name: "Tööde ja toetuse võimaluse ülevaatus",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: "1200",
+            priceCurrency: "EUR"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://teekaart.ee/#faq",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Kas teekaart on sama mis digiteekaart?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Ei. Teekaart.ee aitab valida õige esimese suuna. Digiteekaart.ee keskendub EIS digiteekaardi ja toetuste eelhindamisele."
+          }
+        },
+        {
+          "@type": "Question",
+          name: "Kas pean teadma, millist tarkvara vaja on?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Ei pea. Piisab sellest, kui kirjeldate, mis töö täna aega raiskab või segadust tekitab."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teekaart.ee | Leidke ettevõtte järgmine praktiline samm</title>
+    <meta
+      name="description"
+      content="Teekaart.ee aitab ettevõtte omanikul aru saada, kas järgmine samm on digiteekaart, digitaliseerimine, automatiseerimine või väiksem praktiline töö."
+    />
+    <link rel="canonical" href="https://teekaart.ee/" />
+    <meta property="og:title" content="Teekaart.ee | Milline tee sobib teie ettevõttele?" />
+    <meta
+      property="og:description"
+      content="Kirjeldage, mis ettevõttes praegu segab. Saate lihtsa omaniku vastuse: kas alustada toetuse kontrollist, digitaliseerimisest, automatiseerimisest või väiksemast praktilisest tööst."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://teekaart.ee/" />
+    <meta property="og:image" content="https://teekaart.ee/hero-teekaart.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Teekaart.ee</a>
+        <div class="navlinks">
+          <a href="#teed">Võimalikud teed</a>
+          <a href="#vastus">Mida saate</a>
+          <a href="#hinnad">Hinnad</a>
+          <a href="/omaniku-teekaart/">Näidis</a>
+          <a href="/faq/">FAQ</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-road">
+        <div class="hero-inner">
+          <span class="eyebrow">Kui on vaja edasi liikuda, aga õige alguskoht ei ole selge</span>
+          <h1>Leidke oma ettevõttele järgmine praktiline samm</h1>
+          <p>
+            Te ei pea teadma, kas vaja on toetust, uut tarkvara, automaatikat või lihtsalt paremat töökorraldust.
+            Kirjeldage mure ära ja aitame valida esimese mõistliku tee.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#kontakt" data-track-event="cta_click" data-track-label="hero_start">Alustan lühikese kirjeldusega</a>
+            <a class="btn btn-secondary" href="tel:+37258180435" data-track-event="phone_click" data-track-label="hero_phone">Helista +372 5818 0435</a>
+          </div>
+          <div class="proof">
+            <div><strong>1 suund</strong><span>ütleme, kust on mõistlik alustada</span></div>
+            <div><strong>1 tööpäev</strong><span>esmane vastus pärast vormi</span></div>
+            <div><strong>ilma IT-keerukuseta</strong><span>omaniku keeles, mitte süsteemi keeles</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="teed" class="white">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Neli võimalikku teed</span>
+            <h2>Ühel ettevõttel ei ole vaja kõiki lahendusi korraga.</h2>
+            <p>
+              Tavaliselt on õige alustada ühest selgest küsimusest: kas mure on rahastuses,
+              töökorralduses, korduvates käsitöödes või kliendiinfo liikumises?
+            </p>
+          </div>
+          <div class="grid-4">
+            <article class="card route-card">
+              <span class="stat">01</span>
+              <h3>Toetus ja digiteekaart</h3>
+              <p>Kui soovite aru saada, kas EIS digiteekaart, RTE või mõni muu meede võiks teie plaani aidata.</p>
+              <a href="https://digiteekaart.ee/" data-track-event="partner_site_click" data-track-label="route_digiteekaart">Vaata digiteekaardi suunda</a>
+            </article>
+            <article class="card route-card">
+              <span class="stat">02</span>
+              <h3>Paber, Excel ja vana tarkvara</h3>
+              <p>Kui sama info kirjutatakse mitu korda ümber või vana süsteem takistab igapäevast tööd.</p>
+              <a href="https://digitaliseerimine.ee/" data-track-event="partner_site_click" data-track-label="route_digitaliseerimine">Vaata digitaliseerimise suunda</a>
+            </article>
+            <article class="card route-card">
+              <span class="stat">03</span>
+              <h3>Korduv töö automaatseks</h3>
+              <p>Kui inimesed saadavad samu teateid, koostavad samu faile või kontrollivad samu andmeid käsitsi.</p>
+              <a href="https://automatiseerimine.ee/" data-track-event="partner_site_click" data-track-label="route_automatiseerimine">Vaata automatiseerimise suunda</a>
+            </article>
+            <article class="card route-card">
+              <span class="stat">04</span>
+              <h3>Ei tea, kust alustada</h3>
+              <p>Kui variante on mitu ja omanik tahab enne raha kulutamist saada rahuliku esimese hinnangu.</p>
+              <a href="#kontakt" data-track-event="cta_click" data-track-label="route_unknown">Kirjeldan olukorda</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="vastus" class="sky">
+        <div class="section-inner offer">
+          <div>
+            <span class="kicker">Mida vastu saate</span>
+            <h2>Lühike omaniku vastus, mitte pikk konsultatsiooniraport.</h2>
+            <p>
+              Esimene vastus peab aitama otsustada. Kas minna toetuse eelhindamisse,
+              teha väike töökorralduse korrastus, alustada automaatikaga või mitte praegu midagi suurt teha.
+            </p>
+            <ul class="pain-list">
+              <li>mis on teie kirjeldatud mure tõenäoline tüüp</li>
+              <li>milline esimene samm tundub kõige turvalisem</li>
+              <li>kas toetuse kontroll on mõistlik või raiskaks aega</li>
+              <li>millist infot on enne pakkumist veel vaja</li>
+              <li>mida praegu mitte teha, et raha mitte lukku panna</li>
+            </ul>
+          </div>
+          <aside class="sample">
+            <div class="sample-top">
+              <strong>Näidisvastus</strong>
+              <span>omaniku keeles</span>
+            </div>
+            <div class="sample-body">
+              <span class="tag">Tee: väike digitaliseerimine</span>
+              <h3>Alustage tellimuse info liikumisest, mitte kogu tarkvara vahetusest.</h3>
+              <p>
+                Teie kirjeldus viitab sellele, et esimene kasu tuleb ühest vormist,
+                andmete korrastamisest ja teavitusest. Toetuse võimalust tasub kontrollida,
+                aga enne peab töö täpsemalt piiritlema.
+              </p>
+              <div class="sample-row"><span>Järgmine samm</span><strong>ühe töö lühike plaan</strong></div>
+              <div class="sample-row"><span>Otsus</span><strong>väike projekt enne suurt süsteemi</strong></div>
+              <div class="sample-row"><span>Risk</span><strong>vana info on mitmes kohas laiali</strong></div>
+              <div class="inline-actions">
+                <a class="btn btn-primary" href="#kontakt" data-track-event="cta_click" data-track-label="sample_request">Soovin sellist vastust</a>
+                <a class="btn btn-light" href="/omaniku-teekaart/" data-track-event="cta_click" data-track-label="sample_page">Vaata näidist</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="graphite">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Miks see leht olemas on</span>
+            <h2>Omanik ei pea alustama õige teenuse nime teadmisest.</h2>
+            <p>
+              Sageli teab omanik väga hästi, mis häirib, aga ei tea, kas seda nimetada
+              digitaliseerimiseks, automatiseerimiseks, AI-ks, tarkvaraks või toetuse projektiks.
+              Meie tõlgime mure praktiliseks järgmiseks sammuks.
+            </p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <strong>01</strong>
+              <div>
+                <h3>Teie kirjeldate olukorda</h3>
+                <p>Ühe või kahe lõiguga. Ei pea kasutama tehnilisi sõnu ega nimetama õiget lahendust.</p>
+              </div>
+            </div>
+            <div class="step">
+              <strong>02</strong>
+              <div>
+                <h3>Me eristame õige suuna</h3>
+                <p>Toetus, digitaliseerimine, automaatika, AI abiline või enne lihtsalt info korda.</p>
+              </div>
+            </div>
+            <div class="step">
+              <strong>03</strong>
+              <div>
+                <h3>Jätkate ainult siis, kui samm on mõistlik</h3>
+                <p>Kui jätkata, lepime järgmise töö mahu ja hinna enne alustamist kokku.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="hinnad" class="white">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Selge raam</span>
+            <h2>Alustada saab väikese otsusega.</h2>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <span class="stat">0 €</span>
+              <h3>Esmane suunav vastus</h3>
+              <p>Kirjeldate olukorda. Saate lühikese vastuse, milline tee tundub esimesena mõistlik.</p>
+              <ul class="check">
+                <li>suuna soovitus</li>
+                <li>puuduva info nimekiri</li>
+                <li>kas tasub edasi rääkida</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="stat">390 €</span>
+              <h3>Omaniku ühe lehe teekaart</h3>
+              <p>Paneme ühe mure lihtsaks pildiks: mis on probleem, mis on esimene samm ja mis võiks maksta.</p>
+              <ul class="check">
+                <li>1 lehe praktiline kokkuvõte</li>
+                <li>järgmise sammu hinnaraam</li>
+                <li>toetuse kontrolli vajadus</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="stat">1200 €</span>
+              <h3>Tööde ja toetuse ülevaatus</h3>
+              <p>Kui ettevõttes on mitu mõtet korraga, aitame valida, millest alustada ja mida praegu mitte puutuda.</p>
+              <ul class="check">
+                <li>3-7 mure või töö võrdlus</li>
+                <li>üks soovitatud esimene projekt</li>
+                <li>toetuse ja teostuse sobivuse vaade</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontakt" class="lead-section">
+        <div class="section-inner lead-grid">
+          <div>
+            <span class="kicker">Alustame</span>
+            <h2>Kirjeldage, mis ettevõttes praegu segab.</h2>
+            <p>
+              Vastame ühe tööpäeva jooksul. Kui on kiire, helistage:
+              <a href="tel:+37258180435" data-track-event="phone_click" data-track-label="lead_section_phone">+372 5818 0435</a>.
+            </p>
+            <ul class="check">
+              <li>te ei pea teadma õiget teenuse nime</li>
+              <li>me ei lükka kohe suurt projekti peale</li>
+              <li>me ütleme ka siis, kui esmalt pole mõistlik midagi teha</li>
+            </ul>
+          </div>
+
+          <div class="lead-card">
+            <form id="lead-form" data-site-lead-form data-source-site="teekaart.ee">
+              <input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true" />
+              <div class="form-grid">
+                <div class="field">
+                  <label for="company">Ettevõte *</label>
+                  <input id="company" name="company" autocomplete="organization" required placeholder="Ettevõtte nimi" />
+                </div>
+                <div class="field">
+                  <label for="name">Nimi *</label>
+                  <input id="name" name="name" autocomplete="name" required placeholder="Kuidas teie poole pöörduda" />
+                </div>
+                <div class="field">
+                  <label for="email">E-mail *</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required placeholder="teie@ettevote.ee" />
+                </div>
+                <div class="field">
+                  <label for="phone">Telefon</label>
+                  <input id="phone" name="phone" autocomplete="tel" placeholder="+372 ..." />
+                </div>
+                <div class="field">
+                  <label for="mainPain">Mis on peamine mure?</label>
+                  <select id="mainPain" name="mainPain">
+                    <option value="">Valige</option>
+                    <option>Toetuse võimalus</option>
+                    <option>Paber, Excel või vana tarkvara</option>
+                    <option>Korduv käsitöö</option>
+                    <option>Kliendile vastamine või müük</option>
+                    <option>Ei tea, kust alustada</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="size">Ettevõtte suurus</label>
+                  <select id="size" name="size">
+                    <option value="">Valige</option>
+                    <option>1-10 inimest</option>
+                    <option>11-50 inimest</option>
+                    <option>51-250 inimest</option>
+                    <option>250+ inimest</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label for="problem">Mis täna kõige rohkem aega, raha või rahu võtab? *</label>
+                  <textarea id="problem" name="problem" required placeholder="Näiteks: tellimused tulevad e-maili, kirjutame Excelisse ja hiljem arveprogrammi. Ei tea, kas alustada toetusest või väiksemast lahendusest."></textarea>
+                </div>
+                <div class="field full">
+                  <label for="goal">Mida tahaksite 3 kuu pärast paremini näha?</label>
+                  <input id="goal" name="goal" placeholder="Näiteks: vähem ümberkirjutamist, kiirem vastamine, selgem tööde ülevaade..." />
+                </div>
+              </div>
+              <label class="consent">
+                <input type="checkbox" name="consent" required />
+                <span>Nõustun, et Ettevõtluskeskus OÜ kasutab neid andmeid minu päringule vastamiseks. Soovi korral võite saata infot sobivate toetuste ja praktiliste digitaliseerimise võimaluste kohta.</span>
+              </label>
+              <button class="btn btn-primary" type="submit">Saada päring</button>
+              <p class="form-note">Vastame ühe tööpäeva jooksul. Kontaktandmeid ei müüda ega anta kolmandatele osapooltele.</p>
+              <p class="status-text" id="form-status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script is:inline define:vars={{ leadWebhookUrl, emailHref }}>
+      const form = document.querySelector("#lead-form");
+      const statusEl = document.querySelector("#form-status");
+
+      const getAttribution = () => {
+        if (typeof window.teekaartGetAttribution === "function") {
+          return window.teekaartGetAttribution();
+        }
+        return {};
+      };
+
+      const getLastCta = () => {
+        if (typeof window.teekaartGetLastCta === "function") {
+          return window.teekaartGetLastCta();
+        }
+        return {};
+      };
+
+      const track = (eventName, params = {}) => {
+        if (typeof window.teekaartTrack === "function") {
+          window.teekaartTrack(eventName, params);
+        }
+      };
+
+      const toPlainText = (payload) => {
+        return [
+          "Teekaart.ee päring",
+          "",
+          `Ettevõte: ${payload.company}`,
+          `Nimi: ${payload.name}`,
+          `E-mail: ${payload.email}`,
+          `Telefon: ${payload.phone || "-"}`,
+          `Peamine mure: ${payload.mainPain || "-"}`,
+          `Suurus: ${payload.size || "-"}`,
+          `Soovitud seis: ${payload.goal || "-"}`,
+          "",
+          "Olukorra kirjeldus:",
+          payload.problem,
+          "",
+          "Attribution:",
+          `Landing: ${payload.attribution?.landingPage || "-"}`,
+          `UTM source: ${payload.attribution?.utm_source || "-"}`,
+          `UTM campaign: ${payload.attribution?.utm_campaign || "-"}`,
+          `Last CTA: ${payload.lastCta?.cta_label || "-"}`
+        ].join("\n");
+      };
+
+      const mailFallback = (payload) => {
+        const body = encodeURIComponent(toPlainText(payload));
+        window.location.href = `${emailHref}&body=${body}`;
+      };
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        if (formData.get("website")) return;
+
+        const payload = {
+          source_site: "teekaart.ee",
+          submitted_at: new Date().toISOString(),
+          company: String(formData.get("company") || "").trim(),
+          name: String(formData.get("name") || "").trim(),
+          email: String(formData.get("email") || "").trim(),
+          phone: String(formData.get("phone") || "").trim(),
+          mainPain: String(formData.get("mainPain") || "").trim(),
+          size: String(formData.get("size") || "").trim(),
+          problem: String(formData.get("problem") || "").trim(),
+          goal: String(formData.get("goal") || "").trim(),
+          consent: Boolean(formData.get("consent")),
+          attribution: getAttribution(),
+          lastCta: getLastCta()
+        };
+
+        track("lead_form_submit_attempt", {
+          form_name: "teekaart_suunav_paring",
+          main_pain: payload.mainPain,
+          company_size: payload.size
+        });
+
+        statusEl.textContent = "Saadan...";
+
+        if (!leadWebhookUrl) {
+          track("lead_form_submit", {
+            form_name: "teekaart_suunav_paring",
+            submit_mode: "mailto"
+          });
+          statusEl.textContent = "Avan e-maili akna, et päring teele panna.";
+          mailFallback(payload);
+          return;
+        }
+
+        try {
+          const response = await fetch(leadWebhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) throw new Error(`Webhook failed: ${response.status}`);
+
+          track("lead_form_submit", {
+            form_name: "teekaart_suunav_paring",
+            submit_mode: "webhook",
+            main_pain: payload.mainPain
+          });
+          form.reset();
+          statusEl.textContent = "Aitäh. Päring on käes. Vastame ühe tööpäeva jooksul.";
+        } catch {
+          track("lead_form_submit", {
+            form_name: "teekaart_suunav_paring",
+            submit_mode: "mailto_fallback",
+            main_pain: payload.mainPain
+          });
+          statusEl.textContent = "Automaatne saatmine ei õnnestunud. Avan e-maili varuvariandi.";
+          mailFallback(payload);
+        }
+      });
+    </script>
+  </body>
+</html>

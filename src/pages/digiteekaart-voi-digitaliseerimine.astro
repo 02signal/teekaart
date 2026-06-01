@@ -1,0 +1,91 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digiteekaart, digitaliseerimine või automatiseerimine? | Teekaart.ee</title>
+    <meta
+      name="description"
+      content="Lihtne selgitus ettevõtte omanikule: millal vaadata digiteekaarti, millal digitaliseerimist ja millal automatiseerimist."
+    />
+    <link rel="canonical" href="https://teekaart.ee/digiteekaart-voi-digitaliseerimine/" />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Teekaart.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/omaniku-teekaart/">Näidis</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="small-page">
+      <div class="section-inner article">
+        <span class="kicker">Lihtne valik</span>
+        <h1>Milline tee sobib teie ettevõttele?</h1>
+        <p class="lead">
+          Need sõnad kõlavad sarnaselt, aga omaniku jaoks tähendavad nad erinevat otsust.
+          Õige algus hoiab kokku aega ja raha.
+        </p>
+
+        <div class="grid-3 compare-grid">
+          <article class="card">
+            <span class="stat">1</span>
+            <h2>Digiteekaart</h2>
+            <p>Kui tahate kasutada EIS-i toetust ja vajate enne taotlust selgust, mida teha ja mis see võiks maksta.</p>
+            <ul class="check">
+              <li>toetuse võimaluse kontroll</li>
+              <li>ettevõtte plaani eelhinnang</li>
+              <li>edasine taotluse ettevalmistus</li>
+            </ul>
+            <a href="https://digiteekaart.ee/" data-track-event="partner_site_click" data-track-label="compare_digiteekaart">Mine Digiteekaart.ee lehele</a>
+          </article>
+          <article class="card">
+            <span class="stat">2</span>
+            <h2>Digitaliseerimine</h2>
+            <p>Kui igapäevane töö on paberis, Excelis, e-mailis või vanas tarkvaras ning info liigub aeglaselt.</p>
+            <ul class="check">
+              <li>üks töö lihtsamaks</li>
+              <li>andmed paremini kokku</li>
+              <li>väike praktiline lahendus</li>
+            </ul>
+            <a href="https://digitaliseerimine.ee/" data-track-event="partner_site_click" data-track-label="compare_digitaliseerimine">Mine Digitaliseerimine.ee lehele</a>
+          </article>
+          <article class="card">
+            <span class="stat">3</span>
+            <h2>Automatiseerimine</h2>
+            <p>Kui töö on juba üsna selge, aga inimesed teevad korduvaid samme käsitsi ja seda saab masin aidata.</p>
+            <ul class="check">
+              <li>teavitused ja korduvad raportid</li>
+              <li>andmete liigutamine süsteemide vahel</li>
+              <li>lihtsad AI abilise töövood</li>
+            </ul>
+            <a href="https://automatiseerimine.ee/" data-track-event="partner_site_click" data-track-label="compare_automatiseerimine">Mine Automatiseerimine.ee lehele</a>
+          </article>
+        </div>
+
+        <section class="decision-box">
+          <h2>Kui te ei tea, valige Teekaart.ee.</h2>
+          <p>
+            Kirjeldage olukorda oma sõnadega. Meie anname esimese suuna ja ütleme,
+            millisele rajale tasub edasi minna.
+          </p>
+          <a class="btn btn-primary" href="/#kontakt" data-track-event="cta_click" data-track-label="compare_contact">Küsin suunda</a>
+        </section>
+      </div>
+    </main>
+
+    <Footer label="digiteekaardi, digitaliseerimise ja automatiseerimise valik" />
+  </body>
+</html>

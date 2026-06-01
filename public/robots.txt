@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teekaart.ee/sitemap-index.xml
+
+# Agentidele ja LLM-idele:
+# Kokkuvõte: https://teekaart.ee/llms.txt
+# Struktureeritud profiil: https://teekaart.ee/site-profile.json

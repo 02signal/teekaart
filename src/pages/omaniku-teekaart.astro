@@ -1,0 +1,72 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Omaniku teekaardi näidis | Teekaart.ee</title>
+    <meta
+      name="description"
+      content="Vaadake, milline võib olla ühe lehe omaniku teekaart: probleem, esimene mõistlik samm, riskid, hinnaraam ja toetuse kontroll."
+    />
+    <link rel="canonical" href="https://teekaart.ee/omaniku-teekaart/" />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Teekaart.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/digiteekaart-voi-digitaliseerimine/">Milline tee sobib?</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="small-page">
+      <div class="section-inner article">
+        <span class="kicker">Näidis</span>
+        <h1>Omaniku ühe lehe teekaart</h1>
+        <p class="lead">
+          See on näidis sellest, mida ettevõtte omanik peaks vastu saama:
+          mitte pikk raport, vaid otsustamiseks vajalik selge pilt.
+        </p>
+
+        <section class="report-preview">
+          <div class="sample-top">
+            <strong>Näidisettevõte</strong>
+            <span>omaniku vaade</span>
+          </div>
+          <div class="sample-body">
+            <span class="tag">Soovitatud tee: väike digitaliseerimine</span>
+            <h2>Alustage tellimuse info liikumisest.</h2>
+            <p>
+              Tellimus tuleb e-maili, kantakse Excelisse ja hiljem veel arveprogrammi.
+              Esimene samm ei ole kogu tarkvara vahetamine. Esimene samm on üks selge sisendvorm,
+              kokkulepitud andmeväli ja automaatne teavitus vastutajale.
+            </p>
+            <div class="sample-row"><span>Esimene samm</span><strong>1 vorm + andmetabel + teavitus</strong></div>
+            <div class="sample-row"><span>Hinnaraam</span><strong>900-1900 € + KM, sõltub liidestusest</strong></div>
+            <div class="sample-row"><span>Toetuse vaade</span><strong>RTE või digiteekaardi sobivus vajab kontrolli</strong></div>
+            <div class="sample-row"><span>Risk</span><strong>vanad andmed on mitmes failis ja vajavad puhastamist</strong></div>
+            <div class="sample-row"><span>Mida mitte teha</span><strong>ärge alustage kogu tarkvara väljavahetamisest</strong></div>
+          </div>
+        </section>
+
+        <div class="inline-actions">
+          <a class="btn btn-primary" href="/#kontakt" data-track-event="cta_click" data-track-label="sample_report_contact">Soovin oma teekaarti</a>
+          <a class="btn btn-light" href="tel:+37258180435" data-track-event="phone_click" data-track-label="sample_report_phone">Helista +372 5818 0435</a>
+        </div>
+      </div>
+    </main>
+
+    <Footer label="omaniku teekaardi näidis" />
+  </body>
+</html>

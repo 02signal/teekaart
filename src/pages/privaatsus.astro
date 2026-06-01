@@ -1,0 +1,71 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privaatsus | Teekaart.ee</title>
+    <meta name="description" content="Kuidas Teekaart.ee kasutab päringu, mõõtmise ja kontaktivormi andmeid." />
+    <link rel="canonical" href="https://teekaart.ee/privaatsus/" />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Teekaart.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="small-page white">
+      <div class="section-inner article">
+        <span class="kicker">Privaatsus</span>
+        <h1>Kasutame andmeid päringule vastamiseks ja müügikanali mõõtmiseks.</h1>
+        <p>
+          Veebilehte haldab Ettevõtluskeskus OÜ. Kui saadate vormi, kasutame sisestatud andmeid selleks,
+          et vastata teie päringule, anda esmane suund ja võtta teiega ühendust.
+        </p>
+
+        <h2>Milliseid andmeid kogume</h2>
+        <ul>
+          <li>ettevõtte nimi, kontaktisiku nimi, e-mail ja telefon;</li>
+          <li>kirjeldus probleemist, eesmärgist või plaanist;</li>
+          <li>ettevõtte suurus ja peamine mure, kui need sisestate;</li>
+          <li>tehniline info maandumislehe, viitaja, UTM-parameetrite ja viimase vajutatud nupu kohta.</li>
+        </ul>
+
+        <h2>Milleks kasutame</h2>
+        <ul>
+          <li>päringule vastamiseks;</li>
+          <li>esmase omaniku suuna koostamiseks;</li>
+          <li>vajadusel digiteekaardi, digitaliseerimise või automatiseerimise teenuse soovitamiseks;</li>
+          <li>veebilehe ja reklaamide toimivuse mõõtmiseks.</li>
+        </ul>
+
+        <h2>Mõõtmine</h2>
+        <p>
+          Kui Google Analytics on seadistatud, mõõdame lehevaatamisi, vormi alustamist, vormi saatmist,
+          telefonilingi klikke ja e-maili klikke. Remarketingi kasutame ainult siis,
+          kui vastav nõusoleku lahendus on eraldi kasutusele võetud.
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+          Küsimuste korral kirjutage <a href="mailto:info@02signal.ai">info@02signal.ai</a>
+          või helistage <a href="tel:+37258180435">+372 5818 0435</a>.
+        </p>
+      </div>
+    </main>
+
+    <Footer label="privaatsustingimused" />
+  </body>
+</html>

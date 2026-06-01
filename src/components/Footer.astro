@@ -1,0 +1,20 @@
+---
+const label = Astro.props.label ?? "omaniku järgmise sammu teekaart";
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <strong>Teekaart.ee</strong>
+    <nav class="footer-links" aria-label="Jaluse lingid">
+      <span>Ettevõtluskeskus OÜ · {label}</span>
+      <a href="/omaniku-teekaart/">Omaniku teekaart</a>
+      <a href="/digiteekaart-voi-digitaliseerimine/">Milline tee sobib?</a>
+      <a href="/faq/">FAQ</a>
+      <a href="/privaatsus/">Privaatsus</a>
+      <a href="https://digiteekaart.ee/" data-track-event="partner_site_click" data-track-label="footer_digiteekaart">Digiteekaart.ee</a>
+      <a href="https://digitaliseerimine.ee/" data-track-event="partner_site_click" data-track-label="footer_digitaliseerimine">Digitaliseerimine.ee</a>
+      <a href="mailto:info@02signal.ai" data-track-event="email_click" data-track-label="footer_email">info@02signal.ai</a>
+      <a href="tel:+37258180435" data-track-event="phone_click" data-track-label="footer_phone">+372 5818 0435</a>
+    </nav>
+  </div>
+</footer>

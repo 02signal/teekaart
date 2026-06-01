@@ -1,0 +1,57 @@
+{
+  "site": "https://teekaart.ee",
+  "name": "Teekaart.ee",
+  "legal_owner": "Ettevõtluskeskus OÜ",
+  "language": "et",
+  "country": "EE",
+  "contact": {
+    "email": "info@02signal.ai",
+    "phone": "+37258180435"
+  },
+  "audience": [
+    "Eesti väike- ja keskmise ettevõtte omanikud",
+    "20-30 aastat tegutsenud ettevõtted",
+    "ettevõtted, kus omanik vajab selget järgmist sammu enne tarkvara, toetuse või automatiseerimise otsust"
+  ],
+  "positioning": "Aidata ettevõtte omanikul valida, kas järgmine praktiline samm on digiteekaart, digitaliseerimine, automatiseerimine või väiksem töökorralduse muutus.",
+  "offers": [
+    {
+      "name": "Esmane suunav vastus",
+      "price_eur": 0,
+      "delivery": "1 tööpäev"
+    },
+    {
+      "name": "Omaniku ühe lehe teekaart",
+      "from_price_eur": 390,
+      "vat": "not included"
+    },
+    {
+      "name": "Tööde ja toetuse võimaluse ülevaatus",
+      "from_price_eur": 1200,
+      "vat": "not included"
+    }
+  ],
+  "conversion_events": [
+    "lead_form_start",
+    "lead_form_submit_attempt",
+    "lead_form_submit",
+    "phone_click",
+    "email_click",
+    "partner_site_click",
+    "cta_click"
+  ],
+  "related_sites": [
+    {
+      "site": "https://digiteekaart.ee",
+      "purpose": "EIS digiteekaardi ja toetuse eelhindamine"
+    },
+    {
+      "site": "https://digitaliseerimine.ee",
+      "purpose": "Paber, Excel, vana tarkvara ja info liikumine korda"
+    },
+    {
+      "site": "https://automatiseerimine.ee",
+      "purpose": "Korduvad käsitsi tehtavad tööd automaatseks"
+    }
+  ]
+}

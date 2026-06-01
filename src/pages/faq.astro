@@ -1,0 +1,93 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const faq = [
+  {
+    q: "Kas Teekaart.ee on sama mis digiteekaart?",
+    a: "Ei. Teekaart.ee aitab kõigepealt valida õige suuna. Digiteekaart.ee on täpsem koht siis, kui küsimus on EIS digiteekaardi või toetuse eelhindamises."
+  },
+  {
+    q: "Kas pean teadma, millist teenust küsida?",
+    a: "Ei pea. Kirjeldage lihtsalt, mis ettevõttes segab: paber, Excel, vana tarkvara, korduv käsitöö, aeglane vastamine või toetuse küsimus."
+  },
+  {
+    q: "Miks mitte minna kohe tarkvara ostma?",
+    a: "Sest tihti ei ole esimene probleem tarkvara nimi, vaid töökorraldus, andmete kvaliteet või üks lihtne koht, kus info peab paremini liikuma."
+  },
+  {
+    q: "Millal sobib digiteekaart?",
+    a: "Digiteekaart sobib siis, kui ettevõte tahab suurema digitaliseerimise plaani ja võimalikku EIS-i toetust kasutada. Enne tasub kontrollida, kas ettevõtte olukord ja plaan üldse sobivad."
+  },
+  {
+    q: "Millal sobib automatiseerimine?",
+    a: "Automatiseerimine sobib siis, kui töö on juba selge ja kordub tihti: näiteks teavitused, raportid, andmete liigutamine või kliendile esimese vastuse koostamine."
+  },
+  {
+    q: "Kui kiiresti saan vastuse?",
+    a: "Esmase suunava vastuse anname ühe tööpäeva jooksul pärast vormi saatmist."
+  },
+  {
+    q: "Kas see maksab kohe midagi?",
+    a: "Esmane suunav vastus on tasuta. Kui soovite ühe lehe omaniku teekaarti või tööde võrdlust, lepime hinna ja mahu enne alustamist kokku."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a
+    }
+  }))
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KKK | Teekaart.ee</title>
+    <meta name="description" content="Lühivastused ettevõtte omanikule: mis vahe on teekaardil, digiteekaardil, digitaliseerimisel ja automatiseerimisel." />
+    <link rel="canonical" href="https://teekaart.ee/faq/" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Teekaart.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/omaniku-teekaart/">Näidis</a>
+          <a href="/digiteekaart-voi-digitaliseerimine/">Milline tee sobib?</a>
+          <a href="/#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="small-page white">
+      <div class="section-inner article">
+        <span class="kicker">Küsimused</span>
+        <h1>Lühivastused enne esimese sammu valimist.</h1>
+        {faq.map((item) => (
+          <section class="card" style="margin-top:16px;padding:22px 22px;">
+            <h2 style="margin-top:0;font-size:1.35rem;">{item.q}</h2>
+            <p>{item.a}</p>
+          </section>
+        ))}
+        <div class="inline-actions">
+          <a class="btn btn-primary" href="/#kontakt" data-track-event="cta_click" data-track-label="faq_start">Küsin suunda</a>
+        </div>
+      </div>
+    </main>
+
+    <Footer label="küsimused ja vastused" />
+  </body>
+</html>
