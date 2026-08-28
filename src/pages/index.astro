@@ -690,11 +690,11 @@ const schema = {
           form.reset();
           statusEl.textContent = "Aitäh. Päring on käes. Vastame ühe tööpäeva jooksul.";
         } catch {
-          track("lead_form_submit", {
-            form_name: "teekaart_suunav_paring",
-            submit_mode: "mailto_fallback",
-            main_pain: payload.mainPain
-          });
+          // No lead_form_submit here: mailto is a fallback for a failed AMOS
+          // capture, not a confirmed submission - the person still has to
+          // press Send themselves. lead_form_submit_attempt (above) already
+          // marks the attempt, so the gap reads as "capture failed, fell
+          // back to mailto" instead of a false conversion.
           statusEl.textContent = "Automaatne saatmine ei õnnestunud. Avan e-maili varuvariandi.";
           mailFallback(payload);
         }
