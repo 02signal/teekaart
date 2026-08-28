@@ -680,6 +680,14 @@ const schema = {
             })
           });
           const responseBody = await response.json().catch(() => null);
+          if (response.status === 429) {
+            // The rate limiter working as designed, not a failure - do not
+            // fall into the catch/mailto path below (that would tell the
+            // visitor "automatic sending failed" for something retrying
+            // shortly would fix on its own).
+            statusEl.textContent = "Korraga tuli liiga palju päringuid. Palun proovi mõne minuti pärast uuesti.";
+            return;
+          }
           if (!response.ok || !responseBody?.ok) throw new Error(`AMOS capture failed: ${response.status}`);
 
           track("lead_form_submit", {
