@@ -3,7 +3,6 @@ import Analytics from "../components/Analytics.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
-const leadWebhookUrl = import.meta.env.PUBLIC_SITE_LEAD_WEBHOOK_URL ?? "";
 const emailHref = "mailto:info@02signal.ai?subject=Teekaart.ee%20-%20omaniku%20esimene%20suund";
 const schema = {
   "@context": "https://schema.org",
@@ -469,7 +468,7 @@ const schema = {
 
     <Footer />
 
-    <script is:inline define:vars={{ leadWebhookUrl, emailHref }}>
+    <script is:inline define:vars={{ emailHref }}>
       const form = document.querySelector("#lead-form");
       const statusEl = document.querySelector("#form-status");
 
@@ -625,6 +624,19 @@ const schema = {
         }
       });
 
+      // Carry the meaningful part of the form into the AMOS lead capture
+      // (context.field / context.outcomes on the envelope) so a subscriber
+      // arrives with what they told us, not an empty address. `field` is
+      // clipped to 64 chars server-side; each outcome to 240. mainPain is a
+      // short dropdown label, so it fits `field` directly; the free-text
+      // problem/goal descriptions go into outcomes, where the 240-char cap
+      // is generous enough to keep them whole.
+      const toAmosOutcomes = (payload) => [
+        payload.size ? `Ettevõtte suurus: ${payload.size}` : null,
+        payload.problem ? `Praegune olukord: ${payload.problem}` : null,
+        payload.goal ? `Soovitud seis 3 kuu pärast: ${payload.goal}` : null
+      ].filter(Boolean);
+
       form?.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(form);
@@ -654,28 +666,25 @@ const schema = {
 
         statusEl.textContent = "Saadan...";
 
-        if (!leadWebhookUrl) {
-          track("lead_form_submit", {
-            form_name: "teekaart_suunav_paring",
-            submit_mode: "mailto"
-          });
-          statusEl.textContent = "Avan e-maili akna, et päring teele panna.";
-          mailFallback(payload);
-          return;
-        }
-
         try {
-          const response = await fetch(leadWebhookUrl, {
+          const response = await fetch("/api/subscribe", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+              kind: "topic_subscribe",
+              email: payload.email,
+              topic: "projekt",
+              field: payload.mainPain.slice(0, 64) || null,
+              outcomes: toAmosOutcomes(payload),
+              source_site: "funnel_teekaart"
+            })
           });
-
-          if (!response.ok) throw new Error(`Webhook failed: ${response.status}`);
+          const responseBody = await response.json().catch(() => null);
+          if (!response.ok || !responseBody?.ok) throw new Error(`AMOS capture failed: ${response.status}`);
 
           track("lead_form_submit", {
             form_name: "teekaart_suunav_paring",
-            submit_mode: "webhook",
+            submit_mode: "amos",
             main_pain: payload.mainPain
           });
           form.reset();
