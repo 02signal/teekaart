@@ -50,7 +50,11 @@
 
 const ALLOWED_TOPICS = new Set(['projekt']);
 const ALLOWED_SITES = new Set(['funnel_teekaart']);
-const ALLOWED_KINDS = new Set(['topic_subscribe']);
+const ALLOWED_KINDS = new Set(['topic_subscribe', 'b2b_inquiry']);
+// amos-ops#1944 (omanik 12.–13.11): suunav päring läheb AMOS-i lepingueelse päringuna (kind b2b_inquiry):
+// CS saab kohe teate ettevõtte, vajaduse ja e-postiga; DOI kirja ega uudiskirja ei tule.
+const MAX_COMPANY_LEN = 120;
+const MAX_SUMMARY_LEN = 600;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Bounded per the shared envelope contract (infra/contracts/outreach/
@@ -189,13 +193,21 @@ export default async function handler(req, res) {
         kind,
         email,
         interest_topic: topic,
-        ...(field ? { field } : {}),
-        ...(outcomes.length ? { outcomes } : {}),
-        // Teekaart sells one-off route/roadmap advisory work, not a course —
-        // b2b_outreach is the correct ratified consent purpose
-        // (amos.outreach.lead_capture/v1), distinct from course_offers, and
-        // already listed in teekaart's own brand-sender registry purpose_scope.
-        consent_purpose: 'b2b_outreach',
+        ...(kind === 'b2b_inquiry'
+          ? {
+              // Lepingueelne päring: nõusolekueesmärki ei saadeta (AMOS keelab field/outcomes'i sellel kind'il).
+              ...(cleanText(body.company_name, MAX_COMPANY_LEN) ? { company_name: cleanText(body.company_name, MAX_COMPANY_LEN) } : {}),
+              ...(cleanText(body.request_summary, MAX_SUMMARY_LEN) ? { request_summary: cleanText(body.request_summary, MAX_SUMMARY_LEN) } : {}),
+            }
+          : {
+              ...(field ? { field } : {}),
+              ...(outcomes.length ? { outcomes } : {}),
+              // Teekaart sells one-off route/roadmap advisory work, not a course —
+              // b2b_outreach is the correct ratified consent purpose
+              // (amos.outreach.lead_capture/v1), distinct from course_offers, and
+              // already listed in teekaart's own brand-sender registry purpose_scope.
+              consent_purpose: 'b2b_outreach',
+            }),
         source_site: sourceSite,
         captured_at: new Date().toISOString(),
       }),
