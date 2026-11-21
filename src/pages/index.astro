@@ -671,11 +671,17 @@ const schema = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              kind: "topic_subscribe",
+              // amos-ops#1944: lepingueelne päring → CS saab kohe teate (ettevõte, vajadus, e-post).
+              kind: "b2b_inquiry",
               email: payload.email,
               topic: "projekt",
-              field: payload.mainPain.slice(0, 64) || null,
-              outcomes: toAmosOutcomes(payload),
+              company_name: payload.company,
+              request_summary: [
+                payload.mainPain && `Peamine mure: ${payload.mainPain}`,
+                payload.size && `Suurus: ${payload.size}`,
+                payload.problem && `Probleem: ${payload.problem}`,
+                payload.goal && `Eesmärk: ${payload.goal}`,
+              ].filter(Boolean).join(" · ").slice(0, 600),
               source_site: "funnel_teekaart"
             })
           });
